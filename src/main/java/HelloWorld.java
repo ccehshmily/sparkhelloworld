@@ -33,5 +33,25 @@ public class HelloWorld {
           return new ModelAndView(model, LAYOUT_TEMPLATE);
         },
         new VelocityTemplateEngine());
+    get("/form", (request, response) ->
+        {
+          HashMap model = new HashMap();
+          model.put("template", "templates/form.vtl" );
+          return new ModelAndView(model, LAYOUT_TEMPLATE);
+        },
+        new VelocityTemplateEngine());
+    get("/greeting_card", (request, response) ->
+        {
+          String recipient = request.queryParams("recipient");
+          String sender = request.queryParams("sender");
+
+          HashMap model = new HashMap();
+          model.put("recipient", recipient);
+          model.put("sender", sender);
+          
+          model.put("template", "templates/greeting_card.vtl" );
+          return new ModelAndView(model, LAYOUT_TEMPLATE);
+        },
+        new VelocityTemplateEngine());
   }
 }
